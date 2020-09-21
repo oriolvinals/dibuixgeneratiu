@@ -1,0 +1,14 @@
+* {
+	margin: 0px auto;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+img {
+	width: 400px;
+}
