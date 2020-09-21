@@ -7,11 +7,12 @@ class Text {
         this.font = font;
         this.size = size;
         this.alpha = 25;
-        this.alphaRandom = 20 //Math.floor((Math.random() * 5) + 18);
+        this.alphaRandom = Math.floor((Math.random() * 5) + 20);
     }
 
     display() {
-        if ((this.alpha <= 100 && this.letter.length > 1) || (this.alpha < 150 && this.letter.length == 1)) {
+        //Mentres tingui menys de 150 de alpha, que segueixi pintant la lletra o el text
+        if (this.alpha < 150) {
             fill(this.color[0], this.color[1], this.color[2], this.alpha);
             textFont(this.font);
             textSize(this.size);

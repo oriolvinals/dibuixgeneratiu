@@ -1,11 +1,15 @@
+// Font
 let smallFont;
 
+// Arrays
 let texts = [];
 let circleA = [];
 
+// Booleans
 let circleAnimationEnd = false;
 let textFunction = false;
 
+// Funció preload per carregar la font
 function preload() {
     smallFont = loadFont("SmallText.ttf");
 }
@@ -18,32 +22,37 @@ function setup() {
 }
 
 function draw() {
-    /* ONE TIME FUNCTION */
+    // Mentres els cercles no acabin l'animació
     if (!circleAnimationEnd) {
+        // Actualitzar el cercle de lloc (moviment)
         updateCircles();
+        // Mirar si tots els cercles han acabat el moviment
         checkEndCircles();
     } else {
-        /* Baixem el frameRate perque hi hagi una mica de retard
-        entre textos quant es pinta */
-        frameRate(5);
+        // Baixem el frameRate perque hi hagi una mica de retard entre textos quant es pinta 
+        frameRate(10);
+        // Inicialitzem els textos amb la funció createText
         if (!textFunction) {
             createText();
             textFunction = true;
         } else if (textFunction) {
+            // Cada vegada es sobre posa el text a sobre d'ell mateix pero amb més alpha
             displayText();
         }
     }
 }
 
-/* MODE RESTART */
+// Quan fas click amb el ratolí que es reinicii
 function mousePressed() {
     restart();
 }
 
+// Quan mous el dispositiu que es reinicii
 function deviceShaken() {
     restart();
 }
 
+// Funció de reinici
 function restart() {
     texts = [];
     circleA = [];
@@ -54,13 +63,11 @@ function restart() {
     background(colors[1]);
     displayCircles();
 
-    /* Tornem a pujar el frameRate perque la velocitat
-      dels cercles sigui bonica de veure */
+    // Tornem a pujar el frameRate perque la velocitat dels cercles sigui bonica de veure 
     frameRate(60);
 }
 
-/* Random sort de la array de textos d'aquesta 
-forma no es pinten en un ordre igual sempre */
+// Reordeno l'array de textos de forma Random
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -69,11 +76,12 @@ function shuffle(array) {
     return array;
 }
 
-/* Creació del cercle en una classe */
+// Inicialització Circle amb cadascun dels cercles
 function displayCircles() {
     circles.forEach((e) => {
         let randomDirection = int(random(0, 2));
         let pos1, pos2;
+        // La direcció del cercle pot anar en 2 sentits
         if (randomDirection == 0) {
             pos1 = createVector(e.posX1, e.posY1);
             pos2 = createVector(e.posX2, e.posY2);
@@ -81,24 +89,21 @@ function displayCircles() {
             pos1 = createVector(e.posX2, e.posY2);
             pos2 = createVector(e.posX1, e.posY1);
         }
+
         let c = new Circle(pos1, pos2, colors[0]);
         c.display();
-
         circleA.push(c);
     });
 }
 
-/* Pintem el cercle en la posició seguent
-aquesta acció es fa fins que el cercle
-arriba al final del seu camí*/
+// Pintem el cercle en la seguent posició
 function updateCircles() {
     circleA.forEach((e) => {
         e.update();
     });
 }
 
-/* Check de que tots els cercles hagin acabat el moviment,
-si es el cas fem que surtin les lletres */
+// Mirem si tots els cercles han arribat al final
 function checkEndCircles() {
     let cLength = circleA.length;
     let counter = 0;
@@ -113,7 +118,7 @@ function checkEndCircles() {
     }
 }
 
-/* Creació dels textos petits i les lletres en classes*/
+// Inicialització de la classe Text amb tots els textos i lletres
 function createText() {
     smallText.forEach((e) => {
         const {
@@ -132,14 +137,14 @@ function createText() {
         } = e;
         texts.push(new Text(posX, posY, letter, colors[2], smallFont, 50));
     });
+    //Utilitza la funció shuffle per randomitzar l'array amb els textos i lletres 
     texts = shuffle(texts);
 }
 
 let posText = 0;
-/* Mostra el text o la lletra en un ordre random */
+// Pinta la lletra en un ordre random (d'aquesta forma nomès es pinta 1 lletra per draw)
 function displayText() {
     texts[posText].display();
-
     if (posText < texts.length - 1) {
         posText++;
     } else if (posText == texts.length - 1) {

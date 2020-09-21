@@ -1,3 +1,4 @@
+// JSON amb les propietats del textos petits
 const smallText = [{
     text: "ELECTRONIC",
     posX: 10,
@@ -40,6 +41,7 @@ const smallText = [{
   },
 ];
 
+// JSON amb les propietats de les lletres
 const letters = [{
     letter: "R",
     posX: 150,
@@ -92,6 +94,7 @@ const letters = [{
   },
 ];
 
+// JSON amb les propietats dels cercles
 const circles = [{
     posX1: 50,
     posY1: 150,
@@ -172,6 +175,7 @@ const circles = [{
   }
 ];
 
+// JSON amb les propietats dels colors
 const colors = [
   [
     237,
