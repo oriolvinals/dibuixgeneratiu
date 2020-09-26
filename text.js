@@ -12,7 +12,7 @@ class Text {
 
     display() {
         //Mentres tingui menys de 150 de alpha, que segueixi pintant la lletra o el text
-        if (this.alpha < 150) {
+        if (this.alpha < 160) {
             fill(this.color[0], this.color[1], this.color[2], this.alpha);
             textFont(this.font);
             textSize(this.size);
