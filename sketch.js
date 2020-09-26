@@ -8,8 +8,9 @@ let circleA = [];
 // Booleans
 let circleAnimationEnd = false;
 let textFunction = false;
+let randomR;
 
-// Funció preload per carregar la font
+// Funció preload per carregar la font Kumbh Sans de Google Fonts
 function preload() {
     smallFont = loadFont("SmallText.ttf");
 }
@@ -18,6 +19,9 @@ function setup() {
     createCanvas(400, 565);
     background(colors[1]);
     frameRate(60);
+
+    // Radi random del cercle
+    randomR = int(random(10, 23));
     displayCircles();
 }
 
@@ -60,11 +64,15 @@ function restart() {
     circleAnimationEnd = false;
     textFunction = false;
 
+    // Radi random del cercle
+    randomR = int(random(5, 23));
+
     background(colors[1]);
     displayCircles();
 
     // Tornem a pujar el frameRate perque la velocitat dels cercles sigui bonica de veure 
     frameRate(60);
+
 }
 
 // Reordeno l'array de textos de forma Random
@@ -76,7 +84,7 @@ function shuffle(array) {
     return array;
 }
 
-// Inicialització Circle amb cadascun dels cercles
+// Inicialització classe Circle amb cadascun dels cercles
 function displayCircles() {
     circles.forEach((e) => {
         let randomDirection = int(random(0, 2));
@@ -90,7 +98,7 @@ function displayCircles() {
             pos2 = createVector(e.posX1, e.posY1);
         }
 
-        let c = new Circle(pos1, pos2, colors[0]);
+        let c = new Circle(pos1, pos2, colors[0], randomR);
         c.display();
         circleA.push(c);
     });
@@ -113,6 +121,7 @@ function checkEndCircles() {
         }
     });
 
+    //Si tots els cercles han arribat al final, posem la variable a true per passar a pintar les lletres i textos
     if (cLength == counter) {
         circleAnimationEnd = true;
     }
@@ -142,7 +151,7 @@ function createText() {
 }
 
 let posText = 0;
-// Pinta la lletra en un ordre random (d'aquesta forma nomès es pinta 1 lletra per draw)
+// Pinta 1 lletra o text(d'aquesta forma nomès es pinta 1 lletra per draw i no totes a la vegada)
 function displayText() {
     texts[posText].display();
     if (posText < texts.length - 1) {

@@ -1,13 +1,14 @@
 class Circle {
-    constructor(pos, end, color) {
+    constructor(pos, end, color, r) {
         this.pos = pos;
         this.init = pos;
         this.end = end;
         this.color = color;
         this.direction = this.getDirection(pos, end);
         this.alpha = 0;
+        // Velocitat del cercle
         this.velocity = createVector(0.5, 0.5).mult((Math.random() * 10) + 2.5);
-        this.r = 21;
+        this.r = r;
         this.endDraw = false;
     }
 
@@ -40,7 +41,7 @@ class Circle {
             this.pos.y += this.velocity.y * this.direction.y;
             fill(this.color[0], this.color[1], this.color[2], this.alpha);
             ellipse(this.pos.x, this.pos.y, this.r * 2, this.r * 2);
-            this.alpha += 0.25 * this.velocity.x;
+            this.alpha += 0.2 * this.velocity.x;
         }
     }
 
