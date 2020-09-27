@@ -21,7 +21,7 @@ function setup() {
     frameRate(60);
 
     // Radi random del cercle
-    randomR = int(random(10, 23));
+    randomR = int(random(5, 23));
     displayCircles();
 }
 
